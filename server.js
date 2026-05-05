@@ -1,13 +1,12 @@
 const express = require("express");
+const path = require("path");
 
 const app = express();
 const PORT = 3000;
 
+// Route für Startseite
 app.get("/", (req, res) => {
-  res.send(`
-    <h1>Campus-Point</h1>
-    <p>Server läuft. Verbindung erfolgreich!</p>
-  `);
+  res.sendFile(path.join(__dirname, "frontend", "startseite.html"));
 });
 
 app.listen(PORT, () => {
