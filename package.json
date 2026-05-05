@@ -1,0 +1,24 @@
+{
+  "name": "campus-point",
+  "version": "1.0.0",
+  "description": "System zur Studienplatzvergabe - transparente Kommunikation zwischen der HSPV und den Einstellungsbehörden",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lb2908/Campus-Point.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/lb2908/Campus-Point/issues"
+  },
+  "homepage": "https://github.com/lb2908/Campus-Point#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
