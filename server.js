@@ -5,7 +5,7 @@ const PORT = 3000;
 
 app.get("/", (req, res) => {
   res.send(`
-    <h1>ClearAssign</h1>
+    <h1>Campus-Point</h1>
     <p>Server läuft. Verbindung erfolgreich!</p>
   `);
 });
