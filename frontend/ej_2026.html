@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EJ 2026</title>
+
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(to bottom, #f1f3f5, #dde2e7);
+    color: #1f2933;
+  }
+
+  header {
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 20px 60px;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid #cfd6dd;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+
+  .logo-left,
+  .logo-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    object-fit: contain;
+  }
+
+  .logo-left {
+    left: 60px;
+    height: 65px;
+  }
+
+  .logo-right {
+    right: 60px;
+    height: 170px;
+  }
+
+  h1 {
+    font-size: 64px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #12355b;
+    text-align: center;
+  }
+
+  main {
+    padding: 80px 100px;
+  }
+
+  .bereich-title {
+    font-size: 40px;
+    color: #243b53;
+    margin-bottom: 40px;
+    font-weight: bold;
+  }
+
+  .info-box {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    width: 100%;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  }
+
+  .info-box h2 {
+    font-size: 34px;
+    margin-bottom: 20px;
+    color: #12355b;
+  }
+
+  .info-box p {
+    font-size: 22px;
+    line-height: 1.7;
+    color: #4b5563;
+    margin-bottom: 50px;
+  }
+
+  .funktions-bereich {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  .funktion-box {
+    flex: 1;
+    min-width: 250px;
+    background: #f8fafc;
+    padding: 35px;
+    border-radius: 18px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #12355b;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  }
+
+  .funktion-box:hover,
+  .funktion-box.active {
+    background: #1faa59;
+    color: white;
+    transform: translateY(-6px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  }
+
+  .content-box {
+    display: none;
+    margin-top: 40px;
+    padding: 35px;
+    background: #f8fafc;
+    border-radius: 18px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  }
+
+  .content-box.active {
+    display: block;
+  }
+
+  .content-box h3 {
+    font-size: 30px;
+    color: #12355b;
+    margin-bottom: 20px;
+  }
+
+  .content-box p {
+    font-size: 20px;
+    margin-bottom: 25px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #cfd6dd;
+    border-radius: 12px;
+    font-size: 18px;
+  }
+
+  textarea {
+    min-height: 120px;
+    resize: vertical;
+    grid-column: span 2;
+  }
+
+  .submit-button {
+    margin-top: 25px;
+    padding: 16px 35px;
+    font-size: 19px;
+    font-weight: bold;
+    background: #12355b;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .submit-button:hover {
+    background: #1faa59;
+  }
+
+  .table-section {
+    margin-top: 45px;
+  }
+
+  .table-section h4 {
+    font-size: 26px;
+    color: #12355b;
+    margin-bottom: 18px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  }
+
+  th,
+  td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 16px;
+    vertical-align: top;
+  }
+
+  th {
+    background: #12355b;
+    color: white;
+  }
+
+  .delete-button {
+    padding: 9px 14px;
+    background: #c0392b;
+    color: white;
+    border: none;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .delete-button:hover {
+    background: #922b21;
+  }
+
+  .approval-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .approval-button {
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .approval-button:hover {
+    transform: scale(1.08);
+  }
+
+  .approval-green {
+    background: #1faa59;
+  }
+
+  .approval-yellow {
+    background: #f1c40f;
+    color: #1f2933;
+  }
+
+  .approval-red {
+    background: #c0392b;
+  }
+
+  .status-message {
+    margin-top: 12px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 1.4;
+  }
+
+  .status-green {
+    background: #dff5e8;
+    color: #176b3a;
+    border-left: 6px solid #1faa59;
+  }
+
+  .status-yellow {
+    background: #fff4cc;
+    color: #8a6d00;
+    border-left: 6px solid #f1c40f;
+  }
+
+  .status-red {
+    background: #fde2df;
+    color: #922b21;
+    border-left: 6px solid #c0392b;
+  }
+
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+
+  .modal-box {
+    background: white;
+    padding: 35px;
+    width: 420px;
+    max-width: 90%;
+    border-radius: 20px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    text-align: center;
+  }
+
+  .modal-box h3 {
+    color: #12355b;
+    font-size: 26px;
+    margin-bottom: 18px;
+  }
+
+  .modal-box p {
+    font-size: 18px;
+    color: #4b5563;
+    margin-bottom: 22px;
+  }
+
+  .modal-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+  }
+
+  .modal-confirm {
+    padding: 12px 25px;
+    background: #1faa59;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .modal-cancel {
+    padding: 12px 25px;
+    background: #c0392b;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  @media (max-width: 900px) {
+    h1 {
+      font-size: 40px;
+    }
+
+    .logo-left {
+      height: 45px;
+    }
+
+    .logo-right {
+      height: 90px;
+    }
+
+    main {
+      padding: 50px 30px;
+    }
+
+    .bereich-title {
+      font-size: 28px;
+    }
+
+    .info-box h2 {
+      font-size: 26px;
+    }
+
+    .info-box p {
+      font-size: 18px;
+    }
+
+    .funktion-box {
+      font-size: 20px;
+      padding: 25px;
+    }
+
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+
+    textarea {
+      grid-column: span 1;
+    }
+
+    table {
+      display: block;
+      overflow-x: auto;
+    }
+  }
+</style>
+</head>
+
+<body>
+
+  <header>
+    <img src="/bilder/Logo_hspv.png" alt="HSPV NRW Logo" class="logo-left" />
+    <h1>EJ 2026</h1>
+    <img src="/bilder/Logo_NRW.png" alt="NRW Logo" class="logo-right" />
+  </header>
+
+  <main>
+    <div class="bereich-title">
+      Verwaltungsinformatik – Einstellungsjahrgang 2026
+    </div>
+
+    <div class="info-box">
+      <h2>Willkommen im Bereich EJ 2026</h2>
+
+      <p>
+        Hier können zukünftig Informationen zur Studienplatzvergabe,
+        Behördenkommunikation sowie weitere Verwaltungsprozesse
+        digital verwaltet werden.
+      </p>
+
+      <div class="funktions-bereich">
+        <div class="funktion-box active" onclick="showBereich('bedarf', this)">Bedarf melden</div>
+        <div class="funktion-box" onclick="showBereich('person', this)">Person registrieren</div>
+        <div class="funktion-box" onclick="showBereich('genehmigung', this)">Genehmigung einsehen</div>
+      </div>
+
+      <div id="bedarf" class="content-box active">
+        <h3>Bedarf melden</h3>
+        <p>Hier kann eine Einstellungsbehörde ihren Bedarf für den Einstellungsjahrgang 2026 melden.</p>
+
+        <div class="form-grid">
+          <input id="bedarfBehoerde" type="text" placeholder="Name der Behörde">
+          <input id="bedarfPlaetze" type="number" placeholder="Anzahl benötigter Plätze">
+          <select id="bedarfTyp">
+            <option value="">Behördentyp auswählen</option>
+            <option>Kommune</option>
+            <option>Kreis</option>
+            <option>Großstadt</option>
+            <option>staatliche Behörde</option>
+          </select>
+          <input id="bedarfEmail" type="email" placeholder="Kontakt-E-Mail">
+          <textarea id="bedarfHinweis" placeholder="Weitere Hinweise zum Bedarf"></textarea>
+        </div>
+
+        <button class="submit-button" onclick="bedarfSpeichern()">Bedarf absenden</button>
+
+        <div class="table-section">
+          <h4>Gemeldeter Bedarf</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Behörde</th>
+                <th>Plätze</th>
+                <th>Typ</th>
+                <th>E-Mail</th>
+                <th>Hinweise</th>
+                <th>Genehmigung</th>
+                <th>Aktion</th>
+              </tr>
+            </thead>
+            <tbody id="bedarfTabelle"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="person" class="content-box">
+        <h3>Person registrieren</h3>
+        <p>Hier kann eine Behörde eine Person melden, die einen zugeteilten Studienplatz besetzen soll.</p>
+
+        <div class="form-grid">
+          <input id="personVorname" type="text" placeholder="Vorname">
+          <input id="personNachname" type="text" placeholder="Nachname">
+          <input id="personEmail" type="email" placeholder="E-Mail-Adresse der Person">
+
+          <select id="personBehoerde">
+            <option value="">Behörde auswählen</option>
+          </select>
+
+          <textarea id="personHinweis" placeholder="Weitere Informationen zur Registrierung"></textarea>
+        </div>
+
+        <button class="submit-button" onclick="personSpeichern()">Person registrieren</button>
+
+        <div class="table-section">
+          <h4>Registrierte Personen</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Vorname</th>
+                <th>Nachname</th>
+                <th>E-Mail</th>
+                <th>Behörde</th>
+                <th>Hinweise</th>
+                <th>Genehmigung</th>
+                <th>Aktion</th>
+              </tr>
+            </thead>
+            <tbody id="personenTabelle"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="genehmigung" class="content-box">
+        <h3>Genehmigung einsehen</h3>
+        <p>Hier kann der aktuelle Bearbeitungsstand registrierter Personen eingesehen werden.</p>
+
+        <div class="table-section">
+          <h4>Bearbeitungsstand Personen</h4>
+          <table>
+            <thead>
+              <tr>
+                <th>Vorname</th>
+                <th>Nachname</th>
+                <th>E-Mail</th>
+                <th>Behörde</th>
+                <th>Status</th>
+                <th>Genehmigung</th>
+                <th>Aktion</th>
+              </tr>
+            </thead>
+            <tbody id="genehmigungsTabelle"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal-overlay" id="platzModal">
+    <div class="modal-box">
+      <h3>Teilweise Genehmigung</h3>
+      <p>Wie viele Plätze sollen genehmigt werden?</p>
+      <input id="genehmigtePlaetzeInput" type="number" min="1" placeholder="Anzahl der Plätze">
+      <div class="modal-actions">
+        <button class="modal-confirm" onclick="teilGenehmigungBestaetigen()">Bestätigen</button>
+        <button class="modal-cancel" onclick="modalSchliessen()">Abbrechen</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let aktuelleStatusZelle = null;
+    let personenCounter = 0;
+
+    function showBereich(id, element) {
+      document.querySelectorAll(".content-box").forEach(box => box.classList.remove("active"));
+      document.querySelectorAll(".funktion-box").forEach(box => box.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+      element.classList.add("active");
+    }
+
+    function bedarfSpeichern() {
+      const behoerde = document.getElementById("bedarfBehoerde").value.trim();
+      const plaetze = document.getElementById("bedarfPlaetze").value;
+      const typ = document.getElementById("bedarfTyp").value;
+      const email = document.getElementById("bedarfEmail").value;
+      const hinweis = document.getElementById("bedarfHinweis").value;
+
+      if (!behoerde || !plaetze || !typ || !email) {
+        alert("Bitte füllen Sie mindestens Behörde, Plätze, Typ und E-Mail aus.");
+        return;
+      }
+
+      const zeile = document.createElement("tr");
+
+      zeile.innerHTML = `
+        <td>${behoerde}</td>
+        <td>${plaetze}</td>
+        <td>${typ}</td>
+        <td>${email}</td>
+        <td>${hinweis}</td>
+        <td>
+          <div class="approval-buttons">
+            <button class="approval-button approval-green" onclick="vollGenehmigen(this)">✓</button>
+            <button class="approval-button approval-yellow" onclick="teilGenehmigungOeffnen(this)">○</button>
+            <button class="approval-button approval-red" onclick="nachruecklisteSetzen(this)">✕</button>
+          </div>
+          <div class="status-container"></div>
+        </td>
+        <td><button class="delete-button" onclick="bedarfZeileLoeschen(this)">Löschen</button></td>
+      `;
+
+      document.getElementById("bedarfTabelle").appendChild(zeile);
+
+      document.getElementById("bedarfBehoerde").value = "";
+      document.getElementById("bedarfPlaetze").value = "";
+      document.getElementById("bedarfTyp").value = "";
+      document.getElementById("bedarfEmail").value = "";
+      document.getElementById("bedarfHinweis").value = "";
+    }
+
+    function personSpeichern() {
+      const vorname = document.getElementById("personVorname").value;
+      const nachname = document.getElementById("personNachname").value;
+      const email = document.getElementById("personEmail").value;
+      const behoerde = document.getElementById("personBehoerde").value;
+      const hinweis = document.getElementById("personHinweis").value;
+
+      if (!vorname || !nachname || !email || !behoerde) {
+        alert("Bitte füllen Sie mindestens Vorname, Nachname, E-Mail und Behörde aus.");
+        return;
+      }
+
+      personenCounter++;
+      const personenId = "person-" + personenCounter;
+
+      const zeile = document.createElement("tr");
+      zeile.setAttribute("data-person-id", personenId);
+
+      zeile.innerHTML = `
+        <td>${vorname}</td>
+        <td>${nachname}</td>
+        <td>${email}</td>
+        <td>${behoerde}</td>
+        <td>${hinweis}</td>
+        <td>
+          <div class="approval-buttons">
+            <button class="approval-button approval-green" onclick="personZurHspvSenden(this)">✓</button>
+            <button class="approval-button approval-yellow" onclick="personStatusBearbeitung(this)">○</button>
+          </div>
+          <div class="status-container">
+            <div class="status-message status-yellow">
+              In Bearbeitung.
+            </div>
+          </div>
+        </td>
+        <td><button class="delete-button" onclick="personZeileLoeschen(this)">Löschen</button></td>
+      `;
+
+      document.getElementById("personenTabelle").appendChild(zeile);
+
+      document.getElementById("personVorname").value = "";
+      document.getElementById("personNachname").value = "";
+      document.getElementById("personEmail").value = "";
+      document.getElementById("personBehoerde").value = "";
+      document.getElementById("personHinweis").value = "";
+    }
+
+    function personStatusBearbeitung(button) {
+      const zeile = button.closest("tr");
+
+      zeile.querySelector(".status-container").innerHTML = `
+        <div class="status-message status-yellow">
+          In Bearbeitung.
+        </div>
+      `;
+    }
+
+    function personZurHspvSenden(button) {
+      const zeile = button.closest("tr");
+      const personId = zeile.getAttribute("data-person-id");
+
+      const vorname = zeile.cells[0].textContent;
+      const nachname = zeile.cells[1].textContent;
+      const email = zeile.cells[2].textContent;
+      const behoerde = zeile.cells[3].textContent;
+
+      zeile.querySelector(".status-container").innerHTML = `
+        <div class="status-message status-green">
+          Die Registrierung wurde zur weiteren Verarbeitung an die HSPV übermittelt.
+        </div>
+      `;
+
+      if (document.querySelector(`#genehmigungsTabelle tr[data-person-id="${personId}"]`)) {
+        return;
+      }
+
+      const genehmigungsZeile = document.createElement("tr");
+      genehmigungsZeile.setAttribute("data-person-id", personId);
+
+      genehmigungsZeile.innerHTML = `
+        <td>${vorname}</td>
+        <td>${nachname}</td>
+        <td>${email}</td>
+        <td>${behoerde}</td>
+        <td>
+          <div class="status-message status-yellow">
+            In Bearbeitung.
+          </div>
+        </td>
+        <td>
+          <div class="approval-buttons">
+            <button class="approval-button approval-green" onclick="personEndgueltigGenehmigen(this)">✓</button>
+            <button class="approval-button approval-yellow" onclick="genehmigungStatusBearbeitung(this)">○</button>
+          </div>
+        </td>
+        <td>
+          <button class="delete-button" onclick="genehmigungsZeileLoeschen(this)">Löschen</button>
+        </td>
+      `;
+
+      document.getElementById("genehmigungsTabelle").appendChild(genehmigungsZeile);
+    }
+
+    function personEndgueltigGenehmigen(button) {
+      const zeile = button.closest("tr");
+      const statusZelle = zeile.cells[4];
+
+      statusZelle.innerHTML = `
+        <div class="status-message status-green">
+          Die Person wurde bei der HSPV registriert.
+        </div>
+      `;
+    }
+
+    function genehmigungStatusBearbeitung(button) {
+      const zeile = button.closest("tr");
+      const statusZelle = zeile.cells[4];
+
+      statusZelle.innerHTML = `
+        <div class="status-message status-yellow">
+          In Bearbeitung.
+        </div>
+      `;
+    }
+
+    function behoerdeFreigeben(behoerdeName) {
+      const dropdown = document.getElementById("personBehoerde");
+      const existiertBereits = Array.from(dropdown.options).some(option => option.value === behoerdeName);
+
+      if (!existiertBereits) {
+        const option = document.createElement("option");
+        option.value = behoerdeName;
+        option.textContent = behoerdeName;
+        dropdown.appendChild(option);
+      }
+    }
+
+    function behoerdeEntfernen(behoerdeName) {
+      const dropdown = document.getElementById("personBehoerde");
+
+      Array.from(dropdown.options).forEach(option => {
+        if (option.value === behoerdeName) {
+          option.remove();
+        }
+      });
+    }
+
+    function vollGenehmigen(button) {
+      const zeile = button.closest("tr");
+      const behoerde = zeile.cells[0].textContent;
+      const statusContainer = button.closest("td").querySelector(".status-container");
+
+      statusContainer.innerHTML = `
+        <div class="status-message status-green">
+          Der vollständige Bedarf wurde genehmigt.
+        </div>
+      `;
+
+      behoerdeFreigeben(behoerde);
+    }
+
+    function teilGenehmigungOeffnen(button) {
+      aktuelleStatusZelle = button.closest("td").querySelector(".status-container");
+      document.getElementById("genehmigtePlaetzeInput").value = "";
+      document.getElementById("platzModal").style.display = "flex";
+    }
+
+    function teilGenehmigungBestaetigen() {
+      const anzahl = document.getElementById("genehmigtePlaetzeInput").value;
+
+      if (!anzahl || anzahl <= 0) {
+        alert("Bitte geben Sie eine gültige Anzahl an Plätzen ein.");
+        return;
+      }
+
+      aktuelleStatusZelle.innerHTML = `
+        <div class="status-message status-yellow">
+          Ihnen wurden ${anzahl} Plätze genehmigt.
+        </div>
+      `;
+
+      const zeile = aktuelleStatusZelle.closest("tr");
+      const behoerde = zeile.cells[0].textContent;
+
+      behoerdeFreigeben(behoerde);
+      modalSchliessen();
+    }
+
+    function nachruecklisteSetzen(button) {
+      const zeile = button.closest("tr");
+      const behoerde = zeile.cells[0].textContent;
+      const statusContainer = button.closest("td").querySelector(".status-container");
+
+      statusContainer.innerHTML = `
+        <div class="status-message status-red">
+          Sie wurden nicht in der Erstzuteilung berücksichtigt.
+          Sie wurden auf eine Nachrückerliste gesetzt.
+        </div>
+      `;
+
+      behoerdeEntfernen(behoerde);
+    }
+
+    function modalSchliessen() {
+      document.getElementById("platzModal").style.display = "none";
+      aktuelleStatusZelle = null;
+    }
+
+    function bedarfZeileLoeschen(button) {
+      const zeile = button.closest("tr");
+      const behoerde = zeile.cells[0]?.textContent;
+
+      const bestaetigung = confirm("Soll der Eintrag wirklich gelöscht werden?");
+
+      if (bestaetigung) {
+        if (behoerde) {
+          behoerdeEntfernen(behoerde);
+        }
+
+        zeile.remove();
+      }
+    }
+
+    function personZeileLoeschen(button) {
+      const zeile = button.closest("tr");
+      const personId = zeile.getAttribute("data-person-id");
+
+      const bestaetigung = confirm("Soll der Eintrag wirklich gelöscht werden?");
+
+      if (bestaetigung) {
+        const genehmigungsZeile = document.querySelector(`#genehmigungsTabelle tr[data-person-id="${personId}"]`);
+
+        if (genehmigungsZeile) {
+          genehmigungsZeile.remove();
+        }
+
+        zeile.remove();
+      }
+    }
+
+    function genehmigungsZeileLoeschen(button) {
+      const zeile = button.closest("tr");
+      const personId = zeile.getAttribute("data-person-id");
+
+      const bestaetigung = confirm("Soll der Eintrag wirklich gelöscht werden?");
+
+      if (bestaetigung) {
+        const personenZeile = document.querySelector(`#personenTabelle tr[data-person-id="${personId}"]`);
+
+        if (personenZeile) {
+          personenZeile.remove();
+        }
+
+        zeile.remove();
+      }
+    }
+  </script>
+
+</body>
+</html>

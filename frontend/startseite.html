@@ -71,6 +71,7 @@
     flex-direction: column;
     justify-content: space-between;
     text-align: center;
+    position: relative;
   }
 
   .intro {
@@ -91,6 +92,37 @@
     color: #4b5563;
   }
 
+  .studiengang-button {
+    position: absolute;
+    top: 38%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    padding: 30px 70px;
+    font-size: 32px;
+    font-weight: bold;
+
+    background: #12355b;
+    color: white;
+    text-decoration: none;
+
+    border-radius: 18px;
+
+    cursor: pointer;
+
+    transition: all 0.3s ease;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+
+  .studiengang-button:hover {
+    background: #1faa59;
+
+    transform: translate(-50%, -50%) scale(1.05);
+
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+  }
+
   .campus-image {
     width: 100%;
     height: 35vh;
@@ -103,13 +135,17 @@
   }
 
   @media (max-width: 900px) {
+
     h1 {
       font-size: 42px;
     }
 
-    .logo-left,
+    .logo-left {
+      height: 50px;
+    }
+
     .logo-right {
-      height: 60px;
+      height: 100px;
     }
 
     .intro h2 {
@@ -119,11 +155,18 @@
     .intro p {
       font-size: 18px;
     }
+
+    .studiengang-button {
+      width: 85%;
+      font-size: 22px;
+      padding: 22px 20px;
+    }
   }
 </style>
 </head>
 
 <body>
+
   <header>
     <img src="/bilder/Logo_hspv.png" alt="HSPV NRW Logo" class="logo-left" />
 
@@ -133,8 +176,10 @@
   </header>
 
   <main>
+
     <section class="intro">
       <h2>Studienplatzvergabe für die Verwaltungsinformatik</h2>
+
       <p>
         Campus-Point unterstützt die strukturierte und nachvollziehbare Kommunikation
         zwischen HSPV, Einstellungsbehörden und weiteren Beteiligten im Rahmen der
@@ -142,7 +187,13 @@
       </p>
     </section>
 
+    <a href="/studiengang" class="studiengang-button">
+      Wählen Sie den passenden Studiengang aus
+    </a>
+
     <img src="/bilder/Gebäude.png" alt="HSPV Studienort" class="campus-image" />
+
   </main>
+
 </body>
 </html>
