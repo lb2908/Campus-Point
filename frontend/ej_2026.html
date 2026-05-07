@@ -32,6 +32,44 @@
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   }
 
+  .back-button {
+    position: absolute;
+    top: 145px;
+    left: 25px;
+    padding: 10px 18px;
+    background: #c0392b;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+
+  .back-button:hover {
+    background: #922b21;
+    transform: translateY(-2px);
+  }
+
+  .home-button {
+    position: absolute;
+    top: 145px;
+    right: 25px;
+    padding: 10px 18px;
+    background: #6b7280;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+
+  .home-button:hover {
+    background: #4b5563;
+    transform: translateY(-2px);
+  }
+
   .logo-left,
   .logo-right {
     position: absolute;
@@ -362,6 +400,20 @@
       height: 90px;
     }
 
+    .back-button {
+      top: 125px;
+      left: 15px;
+      font-size: 13px;
+      padding: 8px 12px;
+    }
+
+    .home-button {
+      top: 125px;
+      right: 15px;
+      font-size: 13px;
+      padding: 8px 12px;
+    }
+
     main {
       padding: 50px 30px;
     }
@@ -395,13 +447,24 @@
       display: block;
       overflow-x: auto;
     }
+
   }
+
 </style>
 </head>
 
 <body>
 
   <header>
+
+    <a href="/verwaltungsinformatik" class="back-button">
+      Zurück
+    </a>
+
+    <a href="/" class="home-button">
+      Startseite
+    </a>
+
     <img src="/bilder/Logo_hspv.png" alt="HSPV NRW Logo" class="logo-left" />
     <h1>EJ 2026</h1>
     <img src="/bilder/Logo_NRW.png" alt="NRW Logo" class="logo-right" />

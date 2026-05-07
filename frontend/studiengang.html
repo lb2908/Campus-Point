@@ -32,6 +32,31 @@
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
   }
 
+  .home-button {
+    position: absolute;
+
+    top: 145px;
+    right: 25px;
+
+    padding: 10px 18px;
+
+    background: #6b7280;
+    color: white;
+
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+
+    border-radius: 10px;
+
+    transition: all 0.3s ease;
+  }
+
+  .home-button:hover {
+    background: #4b5563;
+    transform: translateY(-2px);
+  }
+
   .logo-left,
   .logo-right {
     position: absolute;
@@ -130,6 +155,15 @@
       height: 90px;
     }
 
+    .home-button {
+      top: 125px;
+      right: 15px;
+
+      font-size: 13px;
+
+      padding: 8px 12px;
+    }
+
     main {
       padding: 50px 30px;
     }
@@ -143,17 +177,28 @@
       padding: 22px;
     }
   }
+
 </style>
 </head>
 
 <body>
 
   <header>
-    <img src="/bilder/Logo_hspv.png" alt="HSPV NRW Logo" class="logo-left" />
+
+    <a href="/" class="home-button">
+      Startseite
+    </a>
+
+    <img src="/bilder/Logo_hspv.png"
+         alt="HSPV NRW Logo"
+         class="logo-left" />
 
     <h1>Studiengänge</h1>
 
-    <img src="/bilder/Logo_NRW.png" alt="NRW Logo" class="logo-right" />
+    <img src="/bilder/Logo_NRW.png"
+         alt="NRW Logo"
+         class="logo-right" />
+
   </header>
 
   <main>
