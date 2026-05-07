@@ -181,6 +181,28 @@
     margin-bottom: 25px;
   }
 
+  .frist-box {
+    background: #fde2df;
+    color: #922b21;
+    border-left: 8px solid #c0392b;
+    padding: 24px 28px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  }
+
+  .frist-box h4 {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .frist-box p {
+    font-size: 18px;
+    margin-bottom: 8px;
+    line-height: 1.5;
+    color: #922b21;
+  }
+
   .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -224,10 +246,34 @@
     margin-top: 45px;
   }
 
-  .table-section h4 {
+  .table-header {
+    display: flex;
+    align-items: baseline;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+
+  .table-header h4 {
     font-size: 26px;
     color: #12355b;
+  }
+
+  .belegung-info {
+    font-size: 15px;
+    color: #6b7280;
+    font-weight: bold;
+  }
+
+  .error-message {
+    display: none;
     margin-bottom: 18px;
+    padding: 14px 18px;
+    background: #fde2df;
+    color: #922b21;
+    border-left: 6px solid #c0392b;
+    border-radius: 10px;
+    font-weight: bold;
   }
 
   table {
@@ -447,7 +493,6 @@
       display: block;
       overflow-x: auto;
     }
-
   }
 
 </style>
@@ -494,15 +539,19 @@
         <h3>Bedarf melden</h3>
         <p>Hier kann eine Einstellungsbehörde ihren Bedarf für den Einstellungsjahrgang 2026 melden.</p>
 
+        <div class="frist-box">
+          <h4>Wichtige Fristen zur Bedarfsmeldung</h4>
+          <p><strong>Kommunale Behörden</strong> haben Zeit bis zum <strong>31.05.2025</strong>, ihren Bedarf zu melden.</p>
+          <p><strong>Staatliche Behörden</strong> haben Zeit bis zum <strong>31.10.2025</strong>, ihren Bedarf zu melden.</p>
+        </div>
+
         <div class="form-grid">
           <input id="bedarfBehoerde" type="text" placeholder="Name der Behörde">
           <input id="bedarfPlaetze" type="number" placeholder="Anzahl benötigter Plätze">
           <select id="bedarfTyp">
-            <option value="">Behördentyp auswählen</option>
-            <option>Kommune</option>
-            <option>Kreis</option>
-            <option>Großstadt</option>
-            <option>staatliche Behörde</option>
+            <option value="">Akteur auswählen</option>
+            <option>Kommunal</option>
+            <option>Staatlich</option>
           </select>
           <input id="bedarfEmail" type="email" placeholder="Kontakt-E-Mail">
           <textarea id="bedarfHinweis" placeholder="Weitere Hinweise zum Bedarf"></textarea>
@@ -511,13 +560,26 @@
         <button class="submit-button" onclick="bedarfSpeichern()">Bedarf absenden</button>
 
         <div class="table-section">
-          <h4>Gemeldeter Bedarf</h4>
+
+          <div class="table-header">
+            <h4>Gemeldeter Bedarf</h4>
+            <div class="belegung-info">
+              Kommunale Belegung: <span id="kommunalBelegung">0</span> / 66,
+              Staatliche Belegung: <span id="staatlichBelegung">0</span> / 66
+            </div>
+          </div>
+
+          <div id="kapazitaetFehler" class="error-message">
+            Kapazität überschritten.
+          </div>
+
           <table>
             <thead>
               <tr>
                 <th>Behörde</th>
+                <th>Gesendet am</th>
                 <th>Plätze</th>
-                <th>Typ</th>
+                <th>Akteur</th>
                 <th>E-Mail</th>
                 <th>Hinweise</th>
                 <th>Genehmigung</th>
@@ -548,7 +610,10 @@
         <button class="submit-button" onclick="personSpeichern()">Person registrieren</button>
 
         <div class="table-section">
-          <h4>Registrierte Personen</h4>
+          <div class="table-header">
+            <h4>Registrierte Personen</h4>
+          </div>
+
           <table>
             <thead>
               <tr>
@@ -571,7 +636,10 @@
         <p>Hier kann der aktuelle Bearbeitungsstand registrierter Personen eingesehen werden.</p>
 
         <div class="table-section">
-          <h4>Bearbeitungsstand Personen</h4>
+          <div class="table-header">
+            <h4>Bearbeitungsstand Personen</h4>
+          </div>
+
           <table>
             <thead>
               <tr>
@@ -607,11 +675,84 @@
     let aktuelleStatusZelle = null;
     let personenCounter = 0;
 
+    let kommunalBelegung = 0;
+    let staatlichBelegung = 0;
+
     function showBereich(id, element) {
       document.querySelectorAll(".content-box").forEach(box => box.classList.remove("active"));
       document.querySelectorAll(".funktion-box").forEach(box => box.classList.remove("active"));
       document.getElementById(id).classList.add("active");
       element.classList.add("active");
+    }
+
+    function aktuellesDatumErstellen() {
+      const heute = new Date();
+
+      return heute.toLocaleDateString("de-DE", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+      });
+    }
+
+    function belegungAktualisieren() {
+      document.getElementById("kommunalBelegung").textContent = kommunalBelegung;
+      document.getElementById("staatlichBelegung").textContent = staatlichBelegung;
+    }
+
+    function fehlerAnzeigen(text) {
+      const fehler = document.getElementById("kapazitaetFehler");
+      fehler.textContent = text;
+      fehler.style.display = "block";
+
+      setTimeout(() => {
+        fehler.style.display = "none";
+      }, 3500);
+    }
+
+    function aktuelleBelegungNachTyp(typ) {
+      return typ === "Kommunal" ? kommunalBelegung : staatlichBelegung;
+    }
+
+    function setzeBelegungNachTyp(typ, wert) {
+      if (typ === "Kommunal") {
+        kommunalBelegung = wert;
+      } else {
+        staatlichBelegung = wert;
+      }
+
+      belegungAktualisieren();
+    }
+
+    function genehmigungMoeglich(zeile, neueGenehmigtePlaetze) {
+      const typ = zeile.cells[3].textContent;
+      const alteGenehmigtePlaetze = Number(zeile.dataset.genehmigtePlaetze || 0);
+      const aktuelleBelegung = aktuelleBelegungNachTyp(typ);
+      const neueBelegung = aktuelleBelegung - alteGenehmigtePlaetze + neueGenehmigtePlaetze;
+
+      if (neueBelegung > 66) {
+        fehlerAnzeigen("Kapazität überschritten.");
+        return false;
+      }
+
+      setzeBelegungNachTyp(typ, neueBelegung);
+      zeile.dataset.genehmigtePlaetze = neueGenehmigtePlaetze;
+      return true;
+    }
+
+    function genehmigungZuruecknehmen(zeile) {
+      const typ = zeile.cells[3]?.textContent;
+      const alteGenehmigtePlaetze = Number(zeile.dataset.genehmigtePlaetze || 0);
+
+      if (!typ || alteGenehmigtePlaetze === 0) {
+        return;
+      }
+
+      const aktuelleBelegung = aktuelleBelegungNachTyp(typ);
+      const neueBelegung = Math.max(0, aktuelleBelegung - alteGenehmigtePlaetze);
+
+      setzeBelegungNachTyp(typ, neueBelegung);
+      zeile.dataset.genehmigtePlaetze = 0;
     }
 
     function bedarfSpeichern() {
@@ -620,16 +761,19 @@
       const typ = document.getElementById("bedarfTyp").value;
       const email = document.getElementById("bedarfEmail").value;
       const hinweis = document.getElementById("bedarfHinweis").value;
+      const gesendetAm = aktuellesDatumErstellen();
 
       if (!behoerde || !plaetze || !typ || !email) {
-        alert("Bitte füllen Sie mindestens Behörde, Plätze, Typ und E-Mail aus.");
+        alert("Bitte füllen Sie mindestens Behörde, Plätze, Akteur und E-Mail aus.");
         return;
       }
 
       const zeile = document.createElement("tr");
+      zeile.dataset.genehmigtePlaetze = 0;
 
       zeile.innerHTML = `
         <td>${behoerde}</td>
+        <td>${gesendetAm}</td>
         <td>${plaetze}</td>
         <td>${typ}</td>
         <td>${email}</td>
@@ -804,7 +948,12 @@
     function vollGenehmigen(button) {
       const zeile = button.closest("tr");
       const behoerde = zeile.cells[0].textContent;
+      const vollePlaetze = Number(zeile.cells[2].textContent);
       const statusContainer = button.closest("td").querySelector(".status-container");
+
+      if (!genehmigungMoeglich(zeile, vollePlaetze)) {
+        return;
+      }
 
       statusContainer.innerHTML = `
         <div class="status-message status-green">
@@ -822,10 +971,17 @@
     }
 
     function teilGenehmigungBestaetigen() {
-      const anzahl = document.getElementById("genehmigtePlaetzeInput").value;
+      const anzahl = Number(document.getElementById("genehmigtePlaetzeInput").value);
 
       if (!anzahl || anzahl <= 0) {
         alert("Bitte geben Sie eine gültige Anzahl an Plätzen ein.");
+        return;
+      }
+
+      const zeile = aktuelleStatusZelle.closest("tr");
+      const behoerde = zeile.cells[0].textContent;
+
+      if (!genehmigungMoeglich(zeile, anzahl)) {
         return;
       }
 
@@ -835,9 +991,6 @@
         </div>
       `;
 
-      const zeile = aktuelleStatusZelle.closest("tr");
-      const behoerde = zeile.cells[0].textContent;
-
       behoerdeFreigeben(behoerde);
       modalSchliessen();
     }
@@ -846,6 +999,8 @@
       const zeile = button.closest("tr");
       const behoerde = zeile.cells[0].textContent;
       const statusContainer = button.closest("td").querySelector(".status-container");
+
+      genehmigungZuruecknehmen(zeile);
 
       statusContainer.innerHTML = `
         <div class="status-message status-red">
@@ -869,6 +1024,8 @@
       const bestaetigung = confirm("Soll der Eintrag wirklich gelöscht werden?");
 
       if (bestaetigung) {
+        genehmigungZuruecknehmen(zeile);
+
         if (behoerde) {
           behoerdeEntfernen(behoerde);
         }
