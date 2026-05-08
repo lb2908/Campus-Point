@@ -70,6 +70,25 @@
     transform: translateY(-2px);
   }
 
+  .kurs-button {
+    position: absolute;
+    top: 190px;
+    right: 25px;
+    padding: 10px 18px;
+    background: #12355b;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 15px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+
+  .kurs-button:hover {
+    background: #12355c;
+    transform: translateY(-2px);
+  }
+
   .logo-left,
   .logo-right {
     position: absolute;
@@ -432,642 +451,690 @@
     font-weight: bold;
     cursor: pointer;
   }
-
-  @media (max-width: 900px) {
-    h1 {
-      font-size: 40px;
-    }
-
-    .logo-left {
-      height: 45px;
-    }
-
-    .logo-right {
-      height: 90px;
-    }
-
-    .back-button {
-      top: 125px;
-      left: 15px;
-      font-size: 13px;
-      padding: 8px 12px;
-    }
-
-    .home-button {
-      top: 125px;
-      right: 15px;
-      font-size: 13px;
-      padding: 8px 12px;
-    }
-
-    main {
-      padding: 50px 30px;
-    }
-
-    .bereich-title {
-      font-size: 28px;
-    }
-
-    .info-box h2 {
-      font-size: 26px;
-    }
-
-    .info-box p {
-      font-size: 18px;
-    }
-
-    .funktion-box {
-      font-size: 20px;
-      padding: 25px;
-    }
-
-    .form-grid {
-      grid-template-columns: 1fr;
-    }
-
-    textarea {
-      grid-column: span 1;
-    }
-
-    table {
-      display: block;
-      overflow-x: auto;
-    }
-  }
-
 </style>
 </head>
 
 <body>
 
-  <header>
+<header>
+  <a href="/verwaltungsinformatik" class="back-button">Zurück</a>
+  <a href="/" class="home-button">Startseite</a>
+  <a href="/kurse_ej2026" class="kurs-button">Kursliste</a>
 
-    <a href="/verwaltungsinformatik" class="back-button">
-      Zurück
-    </a>
+  <img src="/bilder/Logo_hspv.png" alt="HSPV NRW Logo" class="logo-left" />
+  <h1>EJ 2026</h1>
+  <img src="/bilder/Logo_NRW.png" alt="NRW Logo" class="logo-right" />
+</header>
 
-    <a href="/" class="home-button">
-      Startseite
-    </a>
+<main>
+  <div class="bereich-title">
+    Verwaltungsinformatik – Einstellungsjahrgang 2026
+  </div>
 
-    <img src="/bilder/Logo_hspv.png" alt="HSPV NRW Logo" class="logo-left" />
-    <h1>EJ 2026</h1>
-    <img src="/bilder/Logo_NRW.png" alt="NRW Logo" class="logo-right" />
-  </header>
+  <div class="info-box">
+    <h2>Willkommen im Bereich EJ 2026</h2>
 
-  <main>
-    <div class="bereich-title">
-      Verwaltungsinformatik – Einstellungsjahrgang 2026
+    <p>
+      Hier können zukünftig Informationen zur Studienplatzvergabe,
+      Behördenkommunikation sowie weitere Verwaltungsprozesse
+      digital verwaltet werden.
+    </p>
+
+    <div class="funktions-bereich">
+      <div class="funktion-box active" onclick="showBereich('bedarf', this)">Bedarf melden</div>
+      <div class="funktion-box" onclick="showBereich('person', this)">Person registrieren</div>
+      <div class="funktion-box" onclick="showBereich('genehmigung', this)">Genehmigung einsehen</div>
     </div>
 
-    <div class="info-box">
-      <h2>Willkommen im Bereich EJ 2026</h2>
+    <div id="bedarf" class="content-box active">
+      <h3>Bedarf melden</h3>
+      <p>Hier kann eine Einstellungsbehörde ihren Bedarf für den Einstellungsjahrgang 2026 melden.</p>
 
-      <p>
-        Hier können zukünftig Informationen zur Studienplatzvergabe,
-        Behördenkommunikation sowie weitere Verwaltungsprozesse
-        digital verwaltet werden.
-      </p>
+      <div class="frist-box">
+        <h4>Wichtige Fristen zur Bedarfsmeldung</h4>
 
-      <div class="funktions-bereich">
-        <div class="funktion-box active" onclick="showBereich('bedarf', this)">Bedarf melden</div>
-        <div class="funktion-box" onclick="showBereich('person', this)">Person registrieren</div>
-        <div class="funktion-box" onclick="showBereich('genehmigung', this)">Genehmigung einsehen</div>
+        <p>
+          Die Bedarfsmeldung für den Einstellungsjahrgang 2026
+          kann ab dem <strong>01.04.2025</strong> eingereicht werden.
+        </p>
+
+        <p>
+          <strong>Kommunale Behörden</strong> haben Zeit bis zum
+          <strong>31.05.2025</strong>, ihren Bedarf zu melden.
+        </p>
+
+        <p>
+          <strong>Staatliche Behörden</strong> haben Zeit bis zum
+          <strong>31.10.2025</strong>, ihren Bedarf zu melden.
+        </p>
+
+        <p style="margin-top:16px;">
+          Hinweis: Die Bedarfsmeldung erfolgt unter Vorbehalt.
+          Ein garantierter Zuschlag bzw. eine vollständige
+          Platzzuweisung ist nicht garantiert.
+        </p>
       </div>
 
-      <div id="bedarf" class="content-box active">
-        <h3>Bedarf melden</h3>
-        <p>Hier kann eine Einstellungsbehörde ihren Bedarf für den Einstellungsjahrgang 2026 melden.</p>
+      <div class="form-grid">
+        <input id="bedarfBehoerde" type="text" placeholder="Name der Behörde">
+        <input id="bedarfPlaetze" type="number" placeholder="Anzahl benötigter Plätze">
 
-        <div class="frist-box">
-          <h4>Wichtige Fristen zur Bedarfsmeldung</h4>
-          <p><strong>Kommunale Behörden</strong> haben Zeit bis zum <strong>31.05.2025</strong>, ihren Bedarf zu melden.</p>
-          <p><strong>Staatliche Behörden</strong> haben Zeit bis zum <strong>31.10.2025</strong>, ihren Bedarf zu melden.</p>
-        </div>
+        <input id="bedarfPlz" type="text" placeholder="PLZ">
+        <input id="bedarfOrt" type="text" placeholder="Ort">
 
-        <div class="form-grid">
-          <input id="bedarfBehoerde" type="text" placeholder="Name der Behörde">
-          <input id="bedarfPlaetze" type="number" placeholder="Anzahl benötigter Plätze">
-          <select id="bedarfTyp">
-            <option value="">Akteur auswählen</option>
-            <option>Kommunal</option>
-            <option>Staatlich</option>
-          </select>
-          <input id="bedarfEmail" type="email" placeholder="Kontakt-E-Mail">
-          <textarea id="bedarfHinweis" placeholder="Weitere Hinweise zum Bedarf"></textarea>
-        </div>
+        <select id="bedarfTyp">
+          <option value="">Akteur auswählen</option>
+          <option>Kommunal</option>
+          <option>Staatlich</option>
+        </select>
 
-        <button class="submit-button" onclick="bedarfSpeichern()">Bedarf absenden</button>
-
-        <div class="table-section">
-
-          <div class="table-header">
-            <h4>Gemeldeter Bedarf</h4>
-            <div class="belegung-info">
-              Kommunale Belegung: <span id="kommunalBelegung">0</span> / 66,
-              Staatliche Belegung: <span id="staatlichBelegung">0</span> / 66
-            </div>
-          </div>
-
-          <div id="kapazitaetFehler" class="error-message">
-            Kapazität überschritten.
-          </div>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Behörde</th>
-                <th>Gesendet am</th>
-                <th>Plätze</th>
-                <th>Akteur</th>
-                <th>E-Mail</th>
-                <th>Hinweise</th>
-                <th>Genehmigung</th>
-                <th>Aktion</th>
-              </tr>
-            </thead>
-            <tbody id="bedarfTabelle"></tbody>
-          </table>
-        </div>
+        <input id="bedarfEmail" type="email" placeholder="Kontakt-E-Mail">
+        <textarea id="bedarfHinweis" placeholder="Weitere Hinweise zum Bedarf"></textarea>
       </div>
 
-      <div id="person" class="content-box">
-        <h3>Person registrieren</h3>
-        <p>Hier kann eine Behörde eine Person melden, die einen zugeteilten Studienplatz besetzen soll.</p>
+      <button class="submit-button" onclick="bedarfSpeichern()">Bedarf absenden</button>
 
-        <div class="form-grid">
-          <input id="personVorname" type="text" placeholder="Vorname">
-          <input id="personNachname" type="text" placeholder="Nachname">
-          <input id="personEmail" type="email" placeholder="E-Mail-Adresse der Person">
-
-          <select id="personBehoerde">
-            <option value="">Behörde auswählen</option>
-          </select>
-
-          <textarea id="personHinweis" placeholder="Weitere Informationen zur Registrierung"></textarea>
-        </div>
-
-        <button class="submit-button" onclick="personSpeichern()">Person registrieren</button>
-
-        <div class="table-section">
-          <div class="table-header">
-            <h4>Registrierte Personen</h4>
+      <div class="table-section">
+        <div class="table-header">
+          <h4>Gemeldeter Bedarf</h4>
+          <div class="belegung-info">
+            Kommunale Belegung: <span id="kommunalBelegung">0</span> / 66,
+            Staatliche Belegung: <span id="staatlichBelegung">0</span> / 66
           </div>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Vorname</th>
-                <th>Nachname</th>
-                <th>E-Mail</th>
-                <th>Behörde</th>
-                <th>Hinweise</th>
-                <th>Genehmigung</th>
-                <th>Aktion</th>
-              </tr>
-            </thead>
-            <tbody id="personenTabelle"></tbody>
-          </table>
         </div>
-      </div>
 
-      <div id="genehmigung" class="content-box">
-        <h3>Genehmigung einsehen</h3>
-        <p>Hier kann der aktuelle Bearbeitungsstand registrierter Personen eingesehen werden.</p>
-
-        <div class="table-section">
-          <div class="table-header">
-            <h4>Bearbeitungsstand Personen</h4>
-          </div>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Vorname</th>
-                <th>Nachname</th>
-                <th>E-Mail</th>
-                <th>Behörde</th>
-                <th>Status</th>
-                <th>Genehmigung</th>
-                <th>Aktion</th>
-              </tr>
-            </thead>
-            <tbody id="genehmigungsTabelle"></tbody>
-          </table>
+        <div id="kapazitaetFehler" class="error-message">
+          Kapazität überschritten.
         </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Behörde</th>
+              <th>Gesendet am</th>
+              <th>PLZ</th>
+              <th>Ort</th>
+              <th>Plätze</th>
+              <th>Akteur</th>
+              <th>E-Mail</th>
+              <th>Hinweise</th>
+              <th>Genehmigung</th>
+              <th>Aktion</th>
+            </tr>
+          </thead>
+          <tbody id="bedarfTabelle"></tbody>
+        </table>
       </div>
     </div>
-  </main>
 
-  <div class="modal-overlay" id="platzModal">
-    <div class="modal-box">
-      <h3>Teilweise Genehmigung</h3>
-      <p>Wie viele Plätze sollen genehmigt werden?</p>
-      <input id="genehmigtePlaetzeInput" type="number" min="1" placeholder="Anzahl der Plätze">
-      <div class="modal-actions">
-        <button class="modal-confirm" onclick="teilGenehmigungBestaetigen()">Bestätigen</button>
-        <button class="modal-cancel" onclick="modalSchliessen()">Abbrechen</button>
+    <div id="person" class="content-box">
+      <h3>Person registrieren</h3>
+      <p>Hier kann eine Behörde eine Person melden, die einen zugeteilten Studienplatz besetzen soll.</p>
+
+      <div class="form-grid">
+        <input id="personVorname" type="text" placeholder="Vorname">
+        <input id="personNachname" type="text" placeholder="Nachname">
+        <input id="personEmail" type="email" placeholder="E-Mail-Adresse der Person">
+
+        <select id="personBehoerde">
+          <option value="">Behörde auswählen</option>
+        </select>
+
+        <textarea id="personHinweis" placeholder="Weitere Informationen zur Registrierung"></textarea>
+      </div>
+
+      <button class="submit-button" onclick="personSpeichern()">Person registrieren</button>
+
+      <div class="table-section">
+        <div class="table-header">
+          <h4>Registrierte Personen</h4>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Vorname</th>
+              <th>Nachname</th>
+              <th>E-Mail</th>
+              <th>Behörde</th>
+              <th>Hinweise</th>
+              <th>Genehmigung</th>
+              <th>Aktion</th>
+            </tr>
+          </thead>
+          <tbody id="personenTabelle"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="genehmigung" class="content-box">
+      <h3>Genehmigung einsehen</h3>
+      <p>Hier kann der aktuelle Bearbeitungsstand registrierter Personen eingesehen werden.</p>
+
+      <div class="table-section">
+        <div class="table-header">
+          <h4>Bearbeitungsstand Personen</h4>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Vorname</th>
+              <th>Nachname</th>
+              <th>E-Mail</th>
+              <th>Behörde</th>
+              <th>Status</th>
+              <th>Genehmigung</th>
+              <th>Aktion</th>
+            </tr>
+          </thead>
+          <tbody id="genehmigungsTabelle"></tbody>
+        </table>
       </div>
     </div>
   </div>
+</main>
 
-  <script>
-    let aktuelleStatusZelle = null;
-    let personenCounter = 0;
+<div class="modal-overlay" id="platzModal">
+  <div class="modal-box">
+    <h3>Teilweise Genehmigung</h3>
+    <p>Wie viele Plätze sollen genehmigt werden?</p>
+    <input id="genehmigtePlaetzeInput" type="number" min="1" placeholder="Anzahl der Plätze">
 
-    let kommunalBelegung = 0;
-    let staatlichBelegung = 0;
+    <div class="modal-actions">
+      <button class="modal-confirm" onclick="teilGenehmigungBestaetigen()">Bestätigen</button>
+      <button class="modal-cancel" onclick="modalSchliessen()">Abbrechen</button>
+    </div>
+  </div>
+</div>
 
-    function showBereich(id, element) {
-      document.querySelectorAll(".content-box").forEach(box => box.classList.remove("active"));
-      document.querySelectorAll(".funktion-box").forEach(box => box.classList.remove("active"));
-      document.getElementById(id).classList.add("active");
-      element.classList.add("active");
+<script>
+  let aktuelleStatusZelle = null;
+  let personenCounter = 0;
+
+  let kommunalBelegung = 0;
+  let staatlichBelegung = 0;
+
+  function showBereich(id, element) {
+    document.querySelectorAll(".content-box").forEach(box => box.classList.remove("active"));
+    document.querySelectorAll(".funktion-box").forEach(box => box.classList.remove("active"));
+
+    document.getElementById(id).classList.add("active");
+    element.classList.add("active");
+  }
+
+  function aktuellesDatumErstellen() {
+    const heute = new Date();
+
+    return heute.toLocaleDateString("de-DE", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric"
+    });
+  }
+
+  function belegungAktualisieren() {
+    document.getElementById("kommunalBelegung").textContent = kommunalBelegung;
+    document.getElementById("staatlichBelegung").textContent = staatlichBelegung;
+  }
+
+  function fehlerAnzeigen(text) {
+    const fehler = document.getElementById("kapazitaetFehler");
+    fehler.textContent = text;
+    fehler.style.display = "block";
+
+    setTimeout(() => {
+      fehler.style.display = "none";
+    }, 3500);
+  }
+
+  function aktuelleBelegungNachTyp(typ) {
+    return typ === "Kommunal" ? kommunalBelegung : staatlichBelegung;
+  }
+
+  function setzeBelegungNachTyp(typ, wert) {
+    if (typ === "Kommunal") {
+      kommunalBelegung = wert;
+    } else {
+      staatlichBelegung = wert;
     }
 
-    function aktuellesDatumErstellen() {
-      const heute = new Date();
+    belegungAktualisieren();
+  }
 
-      return heute.toLocaleDateString("de-DE", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric"
-      });
+  function genehmigungMoeglich(zeile, neueGenehmigtePlaetze) {
+    const typ = zeile.cells[5].textContent;
+    const alteGenehmigtePlaetze = Number(zeile.dataset.genehmigtePlaetze || 0);
+    const aktuelleBelegung = aktuelleBelegungNachTyp(typ);
+
+    const neueBelegung =
+      aktuelleBelegung - alteGenehmigtePlaetze + neueGenehmigtePlaetze;
+
+    if (neueBelegung > 66) {
+      fehlerAnzeigen("Kapazität überschritten.");
+      return false;
     }
 
-    function belegungAktualisieren() {
-      document.getElementById("kommunalBelegung").textContent = kommunalBelegung;
-      document.getElementById("staatlichBelegung").textContent = staatlichBelegung;
+    setzeBelegungNachTyp(typ, neueBelegung);
+    zeile.dataset.genehmigtePlaetze = neueGenehmigtePlaetze;
+
+    return true;
+  }
+
+  function genehmigungZuruecknehmen(zeile) {
+    const typ = zeile.cells[5]?.textContent;
+    const alteGenehmigtePlaetze = Number(zeile.dataset.genehmigtePlaetze || 0);
+
+    if (!typ || alteGenehmigtePlaetze === 0) {
+      return;
     }
 
-    function fehlerAnzeigen(text) {
-      const fehler = document.getElementById("kapazitaetFehler");
-      fehler.textContent = text;
-      fehler.style.display = "block";
+    const aktuelleBelegung = aktuelleBelegungNachTyp(typ);
+    const neueBelegung = Math.max(0, aktuelleBelegung - alteGenehmigtePlaetze);
 
-      setTimeout(() => {
-        fehler.style.display = "none";
-      }, 3500);
+    setzeBelegungNachTyp(typ, neueBelegung);
+    zeile.dataset.genehmigtePlaetze = 0;
+  }
+
+  function behoerdeFreigeben(behoerdeName, plz, ort, behoerdenArt) {
+    const dropdown = document.getElementById("personBehoerde");
+
+    const existiertBereits = Array.from(dropdown.options).some(
+      option => option.value === behoerdeName
+    );
+
+    if (!existiertBereits) {
+      const option = document.createElement("option");
+
+      option.value = behoerdeName;
+      option.textContent = behoerdeName;
+
+      option.dataset.plz = plz;
+      option.dataset.ort = ort;
+      option.dataset.behoerdenArt = behoerdenArt;
+
+      dropdown.appendChild(option);
     }
+  }
 
-    function aktuelleBelegungNachTyp(typ) {
-      return typ === "Kommunal" ? kommunalBelegung : staatlichBelegung;
-    }
+  function behoerdeEntfernen(behoerdeName) {
+    const dropdown = document.getElementById("personBehoerde");
 
-    function setzeBelegungNachTyp(typ, wert) {
-      if (typ === "Kommunal") {
-        kommunalBelegung = wert;
-      } else {
-        staatlichBelegung = wert;
+    Array.from(dropdown.options).forEach(option => {
+      if (option.value === behoerdeName) {
+        option.remove();
       }
+    });
+  }
 
-      belegungAktualisieren();
+  function bedarfSpeichern() {
+    const behoerde = document.getElementById("bedarfBehoerde").value.trim();
+    const plaetze = document.getElementById("bedarfPlaetze").value;
+    const plz = document.getElementById("bedarfPlz").value.trim();
+    const ort = document.getElementById("bedarfOrt").value.trim();
+    const typ = document.getElementById("bedarfTyp").value;
+    const email = document.getElementById("bedarfEmail").value;
+    const hinweis = document.getElementById("bedarfHinweis").value;
+    const gesendetAm = aktuellesDatumErstellen();
+
+    if (!behoerde || !plaetze || !plz || !ort || !typ || !email) {
+      alert("Bitte füllen Sie mindestens Behörde, Plätze, PLZ, Ort, Akteur und E-Mail aus.");
+      return;
     }
 
-    function genehmigungMoeglich(zeile, neueGenehmigtePlaetze) {
-      const typ = zeile.cells[3].textContent;
-      const alteGenehmigtePlaetze = Number(zeile.dataset.genehmigtePlaetze || 0);
-      const aktuelleBelegung = aktuelleBelegungNachTyp(typ);
-      const neueBelegung = aktuelleBelegung - alteGenehmigtePlaetze + neueGenehmigtePlaetze;
+    const zeile = document.createElement("tr");
+    zeile.dataset.genehmigtePlaetze = 0;
 
-      if (neueBelegung > 66) {
-        fehlerAnzeigen("Kapazität überschritten.");
-        return false;
-      }
-
-      setzeBelegungNachTyp(typ, neueBelegung);
-      zeile.dataset.genehmigtePlaetze = neueGenehmigtePlaetze;
-      return true;
-    }
-
-    function genehmigungZuruecknehmen(zeile) {
-      const typ = zeile.cells[3]?.textContent;
-      const alteGenehmigtePlaetze = Number(zeile.dataset.genehmigtePlaetze || 0);
-
-      if (!typ || alteGenehmigtePlaetze === 0) {
-        return;
-      }
-
-      const aktuelleBelegung = aktuelleBelegungNachTyp(typ);
-      const neueBelegung = Math.max(0, aktuelleBelegung - alteGenehmigtePlaetze);
-
-      setzeBelegungNachTyp(typ, neueBelegung);
-      zeile.dataset.genehmigtePlaetze = 0;
-    }
-
-    function bedarfSpeichern() {
-      const behoerde = document.getElementById("bedarfBehoerde").value.trim();
-      const plaetze = document.getElementById("bedarfPlaetze").value;
-      const typ = document.getElementById("bedarfTyp").value;
-      const email = document.getElementById("bedarfEmail").value;
-      const hinweis = document.getElementById("bedarfHinweis").value;
-      const gesendetAm = aktuellesDatumErstellen();
-
-      if (!behoerde || !plaetze || !typ || !email) {
-        alert("Bitte füllen Sie mindestens Behörde, Plätze, Akteur und E-Mail aus.");
-        return;
-      }
-
-      const zeile = document.createElement("tr");
-      zeile.dataset.genehmigtePlaetze = 0;
-
-      zeile.innerHTML = `
-        <td>${behoerde}</td>
-        <td>${gesendetAm}</td>
-        <td>${plaetze}</td>
-        <td>${typ}</td>
-        <td>${email}</td>
-        <td>${hinweis}</td>
-        <td>
-          <div class="approval-buttons">
-            <button class="approval-button approval-green" onclick="vollGenehmigen(this)">✓</button>
-            <button class="approval-button approval-yellow" onclick="teilGenehmigungOeffnen(this)">○</button>
-            <button class="approval-button approval-red" onclick="nachruecklisteSetzen(this)">✕</button>
-          </div>
-          <div class="status-container"></div>
-        </td>
-        <td><button class="delete-button" onclick="bedarfZeileLoeschen(this)">Löschen</button></td>
-      `;
-
-      document.getElementById("bedarfTabelle").appendChild(zeile);
-
-      document.getElementById("bedarfBehoerde").value = "";
-      document.getElementById("bedarfPlaetze").value = "";
-      document.getElementById("bedarfTyp").value = "";
-      document.getElementById("bedarfEmail").value = "";
-      document.getElementById("bedarfHinweis").value = "";
-    }
-
-    function personSpeichern() {
-      const vorname = document.getElementById("personVorname").value;
-      const nachname = document.getElementById("personNachname").value;
-      const email = document.getElementById("personEmail").value;
-      const behoerde = document.getElementById("personBehoerde").value;
-      const hinweis = document.getElementById("personHinweis").value;
-
-      if (!vorname || !nachname || !email || !behoerde) {
-        alert("Bitte füllen Sie mindestens Vorname, Nachname, E-Mail und Behörde aus.");
-        return;
-      }
-
-      personenCounter++;
-      const personenId = "person-" + personenCounter;
-
-      const zeile = document.createElement("tr");
-      zeile.setAttribute("data-person-id", personenId);
-
-      zeile.innerHTML = `
-        <td>${vorname}</td>
-        <td>${nachname}</td>
-        <td>${email}</td>
-        <td>${behoerde}</td>
-        <td>${hinweis}</td>
-        <td>
-          <div class="approval-buttons">
-            <button class="approval-button approval-green" onclick="personZurHspvSenden(this)">✓</button>
-            <button class="approval-button approval-yellow" onclick="personStatusBearbeitung(this)">○</button>
-          </div>
-          <div class="status-container">
-            <div class="status-message status-yellow">
-              In Bearbeitung.
-            </div>
-          </div>
-        </td>
-        <td><button class="delete-button" onclick="personZeileLoeschen(this)">Löschen</button></td>
-      `;
-
-      document.getElementById("personenTabelle").appendChild(zeile);
-
-      document.getElementById("personVorname").value = "";
-      document.getElementById("personNachname").value = "";
-      document.getElementById("personEmail").value = "";
-      document.getElementById("personBehoerde").value = "";
-      document.getElementById("personHinweis").value = "";
-    }
-
-    function personStatusBearbeitung(button) {
-      const zeile = button.closest("tr");
-
-      zeile.querySelector(".status-container").innerHTML = `
-        <div class="status-message status-yellow">
-          In Bearbeitung.
+    zeile.innerHTML = `
+      <td>${behoerde}</td>
+      <td>${gesendetAm}</td>
+      <td>${plz}</td>
+      <td>${ort}</td>
+      <td>${plaetze}</td>
+      <td>${typ}</td>
+      <td>${email}</td>
+      <td>${hinweis}</td>
+      <td>
+        <div class="approval-buttons">
+          <button class="approval-button approval-green" onclick="vollGenehmigen(this)">✓</button>
+          <button class="approval-button approval-yellow" onclick="teilGenehmigungOeffnen(this)">○</button>
+          <button class="approval-button approval-red" onclick="nachruecklisteSetzen(this)">✕</button>
         </div>
-      `;
+        <div class="status-container"></div>
+      </td>
+      <td>
+        <button class="delete-button" onclick="bedarfZeileLoeschen(this)">Löschen</button>
+      </td>
+    `;
+
+    document.getElementById("bedarfTabelle").appendChild(zeile);
+
+    document.getElementById("bedarfBehoerde").value = "";
+    document.getElementById("bedarfPlaetze").value = "";
+    document.getElementById("bedarfPlz").value = "";
+    document.getElementById("bedarfOrt").value = "";
+    document.getElementById("bedarfTyp").value = "";
+    document.getElementById("bedarfEmail").value = "";
+    document.getElementById("bedarfHinweis").value = "";
+  }
+
+  function vollGenehmigen(button) {
+    const zeile = button.closest("tr");
+
+    const behoerde = zeile.cells[0].textContent;
+    const plz = zeile.cells[2].textContent;
+    const ort = zeile.cells[3].textContent;
+    const vollePlaetze = Number(zeile.cells[4].textContent);
+    const behoerdenArt = zeile.cells[5].textContent;
+
+    const statusContainer = button.closest("td").querySelector(".status-container");
+
+    if (!genehmigungMoeglich(zeile, vollePlaetze)) {
+      return;
     }
 
-    function personZurHspvSenden(button) {
-      const zeile = button.closest("tr");
-      const personId = zeile.getAttribute("data-person-id");
+    statusContainer.innerHTML = `
+      <div class="status-message status-green">
+        Der vollständige Bedarf wurde genehmigt.
+      </div>
+    `;
 
-      const vorname = zeile.cells[0].textContent;
-      const nachname = zeile.cells[1].textContent;
-      const email = zeile.cells[2].textContent;
-      const behoerde = zeile.cells[3].textContent;
+    behoerdeFreigeben(behoerde, plz, ort, behoerdenArt);
+  }
 
-      zeile.querySelector(".status-container").innerHTML = `
-        <div class="status-message status-green">
-          Die Registrierung wurde zur weiteren Verarbeitung an die HSPV übermittelt.
+  function teilGenehmigungOeffnen(button) {
+    aktuelleStatusZelle = button.closest("td").querySelector(".status-container");
+    document.getElementById("genehmigtePlaetzeInput").value = "";
+    document.getElementById("platzModal").style.display = "flex";
+  }
+
+  function teilGenehmigungBestaetigen() {
+    const anzahl = Number(document.getElementById("genehmigtePlaetzeInput").value);
+
+    if (!anzahl || anzahl <= 0) {
+      alert("Bitte geben Sie eine gültige Anzahl an Plätzen ein.");
+      return;
+    }
+
+    const zeile = aktuelleStatusZelle.closest("tr");
+
+    const behoerde = zeile.cells[0].textContent;
+    const plz = zeile.cells[2].textContent;
+    const ort = zeile.cells[3].textContent;
+    const behoerdenArt = zeile.cells[5].textContent;
+
+    if (!genehmigungMoeglich(zeile, anzahl)) {
+      return;
+    }
+
+    aktuelleStatusZelle.innerHTML = `
+      <div class="status-message status-yellow">
+        Ihnen wurden ${anzahl} Plätze genehmigt.
+      </div>
+    `;
+
+    behoerdeFreigeben(behoerde, plz, ort, behoerdenArt);
+    modalSchliessen();
+  }
+
+  function nachruecklisteSetzen(button) {
+    const zeile = button.closest("tr");
+    const behoerde = zeile.cells[0].textContent;
+    const statusContainer = button.closest("td").querySelector(".status-container");
+
+    genehmigungZuruecknehmen(zeile);
+
+    statusContainer.innerHTML = `
+      <div class="status-message status-red">
+        Sie wurden nicht in der Erstzuteilung berücksichtigt.
+        Sie wurden auf eine Nachrückerliste gesetzt.
+      </div>
+    `;
+
+    behoerdeEntfernen(behoerde);
+  }
+
+  function personSpeichern() {
+    const vorname = document.getElementById("personVorname").value;
+    const nachname = document.getElementById("personNachname").value;
+    const email = document.getElementById("personEmail").value;
+    const behoerdeDropdown = document.getElementById("personBehoerde");
+    const behoerde = behoerdeDropdown.value;
+    const hinweis = document.getElementById("personHinweis").value;
+
+    const selectedOption = behoerdeDropdown.options[behoerdeDropdown.selectedIndex];
+
+    const plz = selectedOption.dataset.plz || "";
+    const ort = selectedOption.dataset.ort || "";
+    const behoerdenArt = selectedOption.dataset.behoerdenArt || "";
+
+    if (!vorname || !nachname || !email || !behoerde) {
+      alert("Bitte füllen Sie mindestens Vorname, Nachname, E-Mail und Behörde aus.");
+      return;
+    }
+
+    personenCounter++;
+    const personenId = "person-" + personenCounter;
+
+    const zeile = document.createElement("tr");
+    zeile.setAttribute("data-person-id", personenId);
+
+    zeile.dataset.plz = plz;
+    zeile.dataset.ort = ort;
+    zeile.dataset.behoerdenArt = behoerdenArt;
+
+    zeile.innerHTML = `
+      <td>${vorname}</td>
+      <td>${nachname}</td>
+      <td>${email}</td>
+      <td>${behoerde}</td>
+      <td>${hinweis}</td>
+      <td>
+        <div class="approval-buttons">
+          <button class="approval-button approval-green" onclick="personZurHspvSenden(this)">✓</button>
+          <button class="approval-button approval-yellow" onclick="personStatusBearbeitung(this)">○</button>
         </div>
-      `;
-
-      if (document.querySelector(`#genehmigungsTabelle tr[data-person-id="${personId}"]`)) {
-        return;
-      }
-
-      const genehmigungsZeile = document.createElement("tr");
-      genehmigungsZeile.setAttribute("data-person-id", personId);
-
-      genehmigungsZeile.innerHTML = `
-        <td>${vorname}</td>
-        <td>${nachname}</td>
-        <td>${email}</td>
-        <td>${behoerde}</td>
-        <td>
+        <div class="status-container">
           <div class="status-message status-yellow">
             In Bearbeitung.
           </div>
-        </td>
-        <td>
-          <div class="approval-buttons">
-            <button class="approval-button approval-green" onclick="personEndgueltigGenehmigen(this)">✓</button>
-            <button class="approval-button approval-yellow" onclick="genehmigungStatusBearbeitung(this)">○</button>
-          </div>
-        </td>
-        <td>
-          <button class="delete-button" onclick="genehmigungsZeileLoeschen(this)">Löschen</button>
-        </td>
-      `;
-
-      document.getElementById("genehmigungsTabelle").appendChild(genehmigungsZeile);
-    }
-
-    function personEndgueltigGenehmigen(button) {
-      const zeile = button.closest("tr");
-      const statusZelle = zeile.cells[4];
-
-      statusZelle.innerHTML = `
-        <div class="status-message status-green">
-          Die Person wurde bei der HSPV registriert.
         </div>
-      `;
+      </td>
+      <td>
+        <button class="delete-button" onclick="personZeileLoeschen(this)">Löschen</button>
+      </td>
+    `;
+
+    document.getElementById("personenTabelle").appendChild(zeile);
+
+    document.getElementById("personVorname").value = "";
+    document.getElementById("personNachname").value = "";
+    document.getElementById("personEmail").value = "";
+    document.getElementById("personBehoerde").value = "";
+    document.getElementById("personHinweis").value = "";
+  }
+
+  function personStatusBearbeitung(button) {
+    const zeile = button.closest("tr");
+
+    zeile.querySelector(".status-container").innerHTML = `
+      <div class="status-message status-yellow">
+        In Bearbeitung.
+      </div>
+    `;
+  }
+
+  function personZurHspvSenden(button) {
+    const zeile = button.closest("tr");
+    const personId = zeile.getAttribute("data-person-id");
+
+    const vorname = zeile.cells[0].textContent;
+    const nachname = zeile.cells[1].textContent;
+    const email = zeile.cells[2].textContent;
+    const behoerde = zeile.cells[3].textContent;
+
+    const plz = zeile.dataset.plz || "";
+    const ort = zeile.dataset.ort || "";
+    const behoerdenArt = zeile.dataset.behoerdenArt || "";
+
+    zeile.querySelector(".status-container").innerHTML = `
+      <div class="status-message status-green">
+        Die Registrierung wurde zur weiteren Verarbeitung an die HSPV übermittelt.
+      </div>
+    `;
+
+    if (document.querySelector(`#genehmigungsTabelle tr[data-person-id="${personId}"]`)) {
+      return;
     }
 
-    function genehmigungStatusBearbeitung(button) {
-      const zeile = button.closest("tr");
-      const statusZelle = zeile.cells[4];
+    const genehmigungsZeile = document.createElement("tr");
+    genehmigungsZeile.setAttribute("data-person-id", personId);
 
-      statusZelle.innerHTML = `
+    genehmigungsZeile.dataset.plz = plz;
+    genehmigungsZeile.dataset.ort = ort;
+    genehmigungsZeile.dataset.behoerdenArt = behoerdenArt;
+
+    genehmigungsZeile.innerHTML = `
+      <td>${vorname}</td>
+      <td>${nachname}</td>
+      <td>${email}</td>
+      <td>${behoerde}</td>
+      <td>
         <div class="status-message status-yellow">
           In Bearbeitung.
         </div>
-      `;
-    }
+      </td>
+      <td>
+        <div class="approval-buttons">
+          <button class="approval-button approval-green" onclick="personEndgueltigGenehmigen(this)">✓</button>
+          <button class="approval-button approval-yellow" onclick="genehmigungStatusBearbeitung(this)">○</button>
+        </div>
+      </td>
+      <td>
+        <button class="delete-button" onclick="genehmigungsZeileLoeschen(this)">Löschen</button>
+      </td>
+    `;
 
-    function behoerdeFreigeben(behoerdeName) {
-      const dropdown = document.getElementById("personBehoerde");
-      const existiertBereits = Array.from(dropdown.options).some(option => option.value === behoerdeName);
+    document.getElementById("genehmigungsTabelle").appendChild(genehmigungsZeile);
+  }
 
-      if (!existiertBereits) {
-        const option = document.createElement("option");
-        option.value = behoerdeName;
-        option.textContent = behoerdeName;
-        dropdown.appendChild(option);
-      }
-    }
+  async function personEndgueltigGenehmigen(button) {
+    const zeile = button.closest("tr");
+    const statusZelle = zeile.cells[4];
 
-    function behoerdeEntfernen(behoerdeName) {
-      const dropdown = document.getElementById("personBehoerde");
+    const person = {
+      vorname: zeile.cells[0].textContent,
+      nachname: zeile.cells[1].textContent,
+      email: zeile.cells[2].textContent,
+      behoerde: zeile.cells[3].textContent,
 
-      Array.from(dropdown.options).forEach(option => {
-        if (option.value === behoerdeName) {
-          option.remove();
-        }
+      plz: zeile.dataset.plz || "",
+      ort: zeile.dataset.ort || "",
+      behoerdenArt: zeile.dataset.behoerdenArt || "",
+
+      status: "Die Person wurde bei der HSPV registriert."
+    };
+
+    try {
+      const antwort = await fetch("/api/genehmigte-person", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(person)
       });
-    }
 
-    function vollGenehmigen(button) {
-      const zeile = button.closest("tr");
-      const behoerde = zeile.cells[0].textContent;
-      const vollePlaetze = Number(zeile.cells[2].textContent);
-      const statusContainer = button.closest("td").querySelector(".status-container");
+      const daten = await antwort.json();
 
-      if (!genehmigungMoeglich(zeile, vollePlaetze)) {
-        return;
+      if (!antwort.ok) {
+        throw new Error("Fehler beim Speichern");
       }
 
-      statusContainer.innerHTML = `
+      statusZelle.innerHTML = `
         <div class="status-message status-green">
-          Der vollständige Bedarf wurde genehmigt.
+          Die Person wurde bei der HSPV registriert.<br><br>
+          <strong>Kennung:</strong> ${daten.person.kennung}<br>
+          <strong>HSPV-Mail:</strong> ${daten.person.hspvEmail}
         </div>
       `;
-
-      behoerdeFreigeben(behoerde);
-    }
-
-    function teilGenehmigungOeffnen(button) {
-      aktuelleStatusZelle = button.closest("td").querySelector(".status-container");
-      document.getElementById("genehmigtePlaetzeInput").value = "";
-      document.getElementById("platzModal").style.display = "flex";
-    }
-
-    function teilGenehmigungBestaetigen() {
-      const anzahl = Number(document.getElementById("genehmigtePlaetzeInput").value);
-
-      if (!anzahl || anzahl <= 0) {
-        alert("Bitte geben Sie eine gültige Anzahl an Plätzen ein.");
-        return;
-      }
-
-      const zeile = aktuelleStatusZelle.closest("tr");
-      const behoerde = zeile.cells[0].textContent;
-
-      if (!genehmigungMoeglich(zeile, anzahl)) {
-        return;
-      }
-
-      aktuelleStatusZelle.innerHTML = `
-        <div class="status-message status-yellow">
-          Ihnen wurden ${anzahl} Plätze genehmigt.
+    } catch (error) {
+      statusZelle.innerHTML = `
+        <div class="status-message status-red">
+          Fehler beim Speichern in MongoDB.
         </div>
       `;
-
-      behoerdeFreigeben(behoerde);
-      modalSchliessen();
     }
+  }
 
-    function nachruecklisteSetzen(button) {
-      const zeile = button.closest("tr");
-      const behoerde = zeile.cells[0].textContent;
-      const statusContainer = button.closest("td").querySelector(".status-container");
+  function genehmigungStatusBearbeitung(button) {
+    const zeile = button.closest("tr");
+    const statusZelle = zeile.cells[4];
 
+    statusZelle.innerHTML = `
+      <div class="status-message status-yellow">
+        In Bearbeitung.
+      </div>
+    `;
+  }
+
+  function modalSchliessen() {
+    document.getElementById("platzModal").style.display = "none";
+    aktuelleStatusZelle = null;
+  }
+
+  function bedarfZeileLoeschen(button) {
+    const zeile = button.closest("tr");
+    const behoerde = zeile.cells[0]?.textContent;
+
+    const bestaetigung = confirm("Soll der Eintrag wirklich gelöscht werden?");
+
+    if (bestaetigung) {
       genehmigungZuruecknehmen(zeile);
 
-      statusContainer.innerHTML = `
-        <div class="status-message status-red">
-          Sie wurden nicht in der Erstzuteilung berücksichtigt.
-          Sie wurden auf eine Nachrückerliste gesetzt.
-        </div>
-      `;
-
-      behoerdeEntfernen(behoerde);
-    }
-
-    function modalSchliessen() {
-      document.getElementById("platzModal").style.display = "none";
-      aktuelleStatusZelle = null;
-    }
-
-    function bedarfZeileLoeschen(button) {
-      const zeile = button.closest("tr");
-      const behoerde = zeile.cells[0]?.textContent;
-
-      const bestaetigung = confirm("Soll der Eintrag wirklich gelöscht werden?");
-
-      if (bestaetigung) {
-        genehmigungZuruecknehmen(zeile);
-
-        if (behoerde) {
-          behoerdeEntfernen(behoerde);
-        }
-
-        zeile.remove();
+      if (behoerde) {
+        behoerdeEntfernen(behoerde);
       }
+
+      zeile.remove();
     }
+  }
 
-    function personZeileLoeschen(button) {
-      const zeile = button.closest("tr");
-      const personId = zeile.getAttribute("data-person-id");
+  function personZeileLoeschen(button) {
+    const zeile = button.closest("tr");
+    const personId = zeile.getAttribute("data-person-id");
 
-      const bestaetigung = confirm("Soll der Eintrag wirklich gelöscht werden?");
+    const bestaetigung = confirm("Soll der Eintrag wirklich gelöscht werden?");
 
-      if (bestaetigung) {
-        const genehmigungsZeile = document.querySelector(`#genehmigungsTabelle tr[data-person-id="${personId}"]`);
+    if (bestaetigung) {
+      const genehmigungsZeile =
+        document.querySelector(`#genehmigungsTabelle tr[data-person-id="${personId}"]`);
 
-        if (genehmigungsZeile) {
-          genehmigungsZeile.remove();
-        }
-
-        zeile.remove();
+      if (genehmigungsZeile) {
+        genehmigungsZeile.remove();
       }
+
+      zeile.remove();
     }
+  }
 
-    function genehmigungsZeileLoeschen(button) {
-      const zeile = button.closest("tr");
-      const personId = zeile.getAttribute("data-person-id");
+  function genehmigungsZeileLoeschen(button) {
+    const zeile = button.closest("tr");
+    const personId = zeile.getAttribute("data-person-id");
 
-      const bestaetigung = confirm("Soll der Eintrag wirklich gelöscht werden?");
+    const bestaetigung = confirm("Soll der Eintrag wirklich gelöscht werden?");
 
-      if (bestaetigung) {
-        const personenZeile = document.querySelector(`#personenTabelle tr[data-person-id="${personId}"]`);
+    if (bestaetigung) {
+      const personenZeile =
+        document.querySelector(`#personenTabelle tr[data-person-id="${personId}"]`);
 
-        if (personenZeile) {
-          personenZeile.remove();
-        }
-
-        zeile.remove();
+      if (personenZeile) {
+        personenZeile.remove();
       }
+
+      zeile.remove();
     }
-  </script>
+  }
+</script>
 
 </body>
 </html>
